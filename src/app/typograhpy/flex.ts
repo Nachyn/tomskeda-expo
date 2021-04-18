@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
+import { View } from 'react-native';
 
-export const Flex = styled.View`
+export const Flex = styled(View)`
   display: flex;
 `;
 
