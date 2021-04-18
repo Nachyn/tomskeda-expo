@@ -3,6 +3,8 @@ import styled from 'styled-components/native';
 import { FoodSelection } from './pages/FoodSelection';
 import { useFonts } from 'expo-font';
 import { AppLoading } from './components/AppLoading';
+import { ColumnFlex } from './typograhpy/flex';
+import { StatusBar } from 'react-native';
 
 export function App() {
   const [fontIsLoaded] = useFonts({
@@ -20,4 +22,6 @@ export function App() {
   );
 }
 
-const AppComponent = styled.View``;
+const AppComponent = styled(ColumnFlex)`
+  padding-top: ${StatusBar.currentHeight};
+`;
