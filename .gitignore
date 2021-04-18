@@ -1,3 +1,6 @@
+#my ignore
+.idea/
+
 node_modules/
 .expo/
 npm-debug.*
