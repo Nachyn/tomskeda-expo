@@ -14,14 +14,6 @@ export const CenteredColumnFlex = styled(ColumnFlex)`
   align-items: center;
 `;
 
-export const CenteredColumnFlexWithSpacing = styled(CenteredColumnFlex)<{
-  spacing: string;
-}>`
-  > *:not(:last-child) {
-    margin-bottom: ${(props) => props.spacing};
-  }
-`;
-
 export const RowFlex = styled(Flex)`
   flex-direction: row;
 `;
@@ -29,12 +21,4 @@ export const RowFlex = styled(Flex)`
 export const CenteredRowFlex = styled(RowFlex)`
   justify-content: center;
   align-items: center;
-`;
-
-export const CenteredRowFlexWithSpacing = styled(CenteredRowFlex)<{
-  spacing: string;
-}>`
-  > *:not(:last-child) {
-    margin-right: ${(props) => props.spacing};
-  }
 `;
