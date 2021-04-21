@@ -14,16 +14,15 @@ const sizes = {
 
 export const useIsMini = () =>
   useMediaQuery({
-    maxDeviceWidth: sizes.mini
+    query: `(max-width: ${sizes.mini}px)`
   });
 
 export const useIsMobile = () =>
   useMediaQuery({
-    maxDeviceWidth: sizes.mobile
+    query: `(max-width: ${sizes.mobile}px)`
   });
 
 export const useIsStrictMobile = () =>
   useMediaQuery({
-    maxDeviceWidth: sizes.mobile,
-    minDeviceWidth: sizes.mini
+    query: `(min-width: ${sizes.mini}px) and (max-width: ${sizes.mobile}px)`
   });

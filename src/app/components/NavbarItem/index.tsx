@@ -18,6 +18,7 @@ interface NavbarItemProps {
 
   text: string;
   isActive: boolean;
+  isShort: boolean;
 
   onPress: () => void;
   style?: StyleProp<ViewStyle>;
@@ -36,7 +37,9 @@ export function NavbarItem(props: NavbarItemProps) {
           iconSize={props.iconInnerSize}
           color={currentColor}
         />
-        <NavbarItemText color={currentColor}>{props.text}</NavbarItemText>
+        {(props.isActive || !props.isShort) && (
+          <NavbarItemText color={currentColor}>{props.text}</NavbarItemText>
+        )}
       </NavbarItemComponent>
     </TouchableWithoutFeedback>
   );

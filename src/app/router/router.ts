@@ -14,10 +14,11 @@ export const addGetCurrentRouteListener = (
   routeNameCallback: (routeName: string | undefined) => void
 ) =>
   navigationRef.current!.addListener(stateEventName, ({ data: { state } }) => {
-    const routeNames = state?.routeNames;
+    const routes = state?.routes;
     const index = state?.index;
-    if (routeNames && index !== undefined) {
-      routeNameCallback(routeNames[index]);
+
+    if (routes && index !== undefined) {
+      routeNameCallback(routes[index].name);
       return;
     }
     routeNameCallback(undefined);

@@ -14,6 +14,7 @@ import { navigationRef } from './router/router';
 import { isWeb } from './helpers/platform-helpers';
 import { ColumnFlex } from './typograhpy/flex';
 import styled from 'styled-components/native';
+import { Contacts } from './pages/Contacts';
 
 const Stack = createStackNavigator();
 
@@ -40,14 +41,14 @@ export function App() {
               }}
             >
               <Stack.Screen
-                name={RouteNames.DeliveryInfo}
-                options={{}}
-                component={DeliveryInfo}
-              />
-              <Stack.Screen
                 name={RouteNames.FoodSelection}
                 component={FoodSelection}
               />
+              <Stack.Screen
+                name={RouteNames.DeliveryInfo}
+                component={DeliveryInfo}
+              />
+              <Stack.Screen name={RouteNames.Contacts} component={Contacts} />
             </Stack.Navigator>
             <Navbar />
           </>

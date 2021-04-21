@@ -7,6 +7,7 @@ import styled from 'styled-components/native';
 import { CenteredRowFlex } from '../../typograhpy/flex';
 import * as Router from '../../router/router';
 import { RouteNames } from '../../router/routes';
+import { useIsMobile } from '../../../styles/media';
 
 export function Navbar() {
   const [currentRouteName, setCurrentRouteName] = useState<string | undefined>(
@@ -20,6 +21,9 @@ export function Navbar() {
       unsubscribe && unsubscribe();
     };
   }, []);
+
+  const isMobile = useIsMobile();
+
   return (
     <NavbarComponent>
       <NavbarItem
@@ -30,8 +34,9 @@ export function Navbar() {
         iconInnerSize={20}
         text={'Заказать'}
         isActive={currentRouteName === RouteNames.FoodSelection}
+        isShort={isMobile}
       />
-      <LastNavbarItem
+      <NavbarItem
         onPress={() => Router.navigate(RouteNames.DeliveryInfo)}
         icon={MaterialIcons}
         iconName={'delivery-dining'}
@@ -39,6 +44,17 @@ export function Navbar() {
         iconInnerSize={20}
         text={'Доставка и оплата'}
         isActive={currentRouteName === RouteNames.DeliveryInfo}
+        isShort={isMobile}
+      />
+      <LastNavbarItem
+        onPress={() => Router.navigate(RouteNames.Contacts)}
+        icon={MaterialIcons}
+        iconName={'quick-contacts-dialer'}
+        iconSize={IconSize.s16x16}
+        iconInnerSize={20}
+        text={'Контакты'}
+        isActive={currentRouteName === RouteNames.Contacts}
+        isShort={isMobile}
       />
     </NavbarComponent>
   );
