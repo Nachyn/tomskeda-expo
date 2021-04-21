@@ -10,11 +10,6 @@ export const BaseText = styled(Text)<{
 `;
 
 export const TextRegular = styled(BaseText)`
-  font-size: 16px;
-  line-height: 16px;
-`;
-
-export const TextMiddle = styled(BaseText)`
   font-size: 14px;
   line-height: 16px;
 `;

@@ -5,7 +5,8 @@ import { Hint } from '../../typograhpy/text';
 import { CenteredRowFlex } from '../../typograhpy/flex';
 import { IconSize } from '../../models/icon-size';
 import { IconWrapper } from '../IconWrapper';
-import { StyleProp, ViewStyle } from 'react-native';
+import { StyleProp, TouchableWithoutFeedback, ViewStyle } from 'react-native';
+import { isWeb } from '../../helpers/platform-helpers';
 
 interface NavbarItemProps {
   icon: React.ComponentType<
@@ -18,6 +19,7 @@ interface NavbarItemProps {
   text: string;
   isActive: boolean;
 
+  onPress: () => void;
   style?: StyleProp<ViewStyle>;
 }
 
@@ -25,20 +27,26 @@ export function NavbarItem(props: NavbarItemProps) {
   const currentColor = props.isActive ? primaryColor : mainBlack;
 
   return (
-    <NavbarItemComponent style={props.style}>
-      <IconWrapper
-        icon={props.icon}
-        name={props.iconName}
-        size={props.iconSize}
-        iconSize={props.iconInnerSize}
-        color={currentColor}
-      />
-      <NavbarItemText color={currentColor}>{props.text}</NavbarItemText>
-    </NavbarItemComponent>
+    <TouchableWithoutFeedback onPress={props.onPress}>
+      <NavbarItemComponent style={props.style}>
+        <IconWrapper
+          icon={props.icon}
+          name={props.iconName}
+          size={props.iconSize}
+          iconSize={props.iconInnerSize}
+          color={currentColor}
+        />
+        <NavbarItemText color={currentColor}>{props.text}</NavbarItemText>
+      </NavbarItemComponent>
+    </TouchableWithoutFeedback>
   );
 }
 
 const NavbarItemComponent = styled(CenteredRowFlex)`
+  ${isWeb() &&
+  `
+    cursor: pointer;
+  `}
   border-radius: 20px;
   height: 36px;
   background: ${mainGray};
