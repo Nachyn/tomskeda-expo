@@ -15,6 +15,8 @@ import { isWeb } from './helpers/platform-helpers';
 import { ColumnFlex } from './typograhpy/flex';
 import styled from 'styled-components/native';
 import { Contacts } from './pages/Contacts';
+import { Provider } from 'react-redux';
+import { store } from '../store/store';
 
 const Stack = createStackNavigator();
 
@@ -27,36 +29,38 @@ export function App() {
   const appIsReady = fontIsLoaded && navIsReady;
 
   return (
-    <NavigationContainer
-      linking={linking}
-      ref={navigationRef}
-      onReady={() => setNavIsReady(true)}
-    >
-      <AppComponent>
-        {appIsReady ? (
-          <>
-            <Stack.Navigator
-              screenOptions={{
-                headerShown: false
-              }}
-            >
-              <Stack.Screen
-                name={RouteNames.FoodSelection}
-                component={FoodSelection}
-              />
-              <Stack.Screen
-                name={RouteNames.DeliveryInfo}
-                component={DeliveryInfo}
-              />
-              <Stack.Screen name={RouteNames.Contacts} component={Contacts} />
-            </Stack.Navigator>
-            <Navbar />
-          </>
-        ) : (
-          <AppLoading />
-        )}
-      </AppComponent>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer
+        linking={linking}
+        ref={navigationRef}
+        onReady={() => setNavIsReady(true)}
+      >
+        <AppComponent>
+          {appIsReady ? (
+            <>
+              <Stack.Navigator
+                screenOptions={{
+                  headerShown: false
+                }}
+              >
+                <Stack.Screen
+                  name={RouteNames.FoodSelection}
+                  component={FoodSelection}
+                />
+                <Stack.Screen
+                  name={RouteNames.DeliveryInfo}
+                  component={DeliveryInfo}
+                />
+                <Stack.Screen name={RouteNames.Contacts} component={Contacts} />
+              </Stack.Navigator>
+              <Navbar />
+            </>
+          ) : (
+            <AppLoading />
+          )}
+        </AppComponent>
+      </NavigationContainer>
+    </Provider>
   );
 }
 
