@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { FoodSelection } from './pages/FoodSelection';
-import { useFonts } from 'expo-font';
 import { AppLoading } from './components/AppLoading';
 import { StatusBar } from 'react-native';
 import { Navbar } from './components/Navbar';
@@ -17,13 +16,12 @@ import styled from 'styled-components/native';
 import { Contacts } from './pages/Contacts';
 import { Provider } from 'react-redux';
 import { store } from '../store/store';
+import { useLoadFontComfortaa } from './fonts/comfortaa';
 
 const Stack = createStackNavigator();
 
 export function App() {
-  const [fontIsLoaded] = useFonts({
-    Comfortaa: require('../../assets/fonts/Comfortaa-VariableFont_wght.ttf')
-  });
+  const [fontIsLoaded] = useLoadFontComfortaa();
 
   const [navIsReady, setNavIsReady] = useState(false);
   const appIsReady = fontIsLoaded && navIsReady;

@@ -1,11 +1,13 @@
 import styled from 'styled-components/native';
 import { mainBlack } from '../themes/colors';
 import { Text } from 'react-native';
+import { FontComfortaa } from '../fonts/comfortaa';
 
 export const BaseText = styled(Text)<{
   color?: string;
+  font?: FontComfortaa;
 }>`
-  font-family: Comfortaa;
+  font-family: ${p => p.font || FontComfortaa.Regular};
   color: ${p => p.color || mainBlack};
 `;
 

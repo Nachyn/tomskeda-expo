@@ -30,8 +30,7 @@ export function Navbar() {
         onPress={() => Router.navigate(RouteNames.FoodSelection)}
         icon={Foundation}
         iconName={'home'}
-        iconSize={IconSize.s16x16}
-        iconInnerSize={20}
+        iconSize={IconSize.s20x20}
         text={'Заказать'}
         isActive={currentRouteName === RouteNames.FoodSelection}
         isShort={isMobile}
@@ -40,8 +39,7 @@ export function Navbar() {
         onPress={() => Router.navigate(RouteNames.DeliveryInfo)}
         icon={MaterialIcons}
         iconName={'delivery-dining'}
-        iconSize={IconSize.s16x16}
-        iconInnerSize={20}
+        iconSize={IconSize.s20x20}
         text={'Доставка и оплата'}
         isActive={currentRouteName === RouteNames.DeliveryInfo}
         isShort={isMobile}
@@ -50,8 +48,7 @@ export function Navbar() {
         onPress={() => Router.navigate(RouteNames.Contacts)}
         icon={MaterialIcons}
         iconName={'quick-contacts-dialer'}
-        iconSize={IconSize.s16x16}
-        iconInnerSize={20}
+        iconSize={IconSize.s20x20}
         text={'Контакты'}
         isActive={currentRouteName === RouteNames.Contacts}
         isShort={isMobile}

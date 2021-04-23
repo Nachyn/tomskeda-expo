@@ -7,6 +7,7 @@ import { IconSize } from '../../models/icon-size';
 import { IconWrapper } from '../IconWrapper';
 import { StyleProp, TouchableWithoutFeedback, ViewStyle } from 'react-native';
 import { isWeb } from '../../helpers/platform-helpers';
+import { FontComfortaa } from '../../fonts/comfortaa';
 
 interface NavbarItemProps {
   icon: React.ComponentType<
@@ -14,7 +15,7 @@ interface NavbarItemProps {
   >;
   iconName: string;
   iconSize: IconSize;
-  iconInnerSize: number;
+  iconInnerSize?: number;
 
   text: string;
   isActive: boolean;
@@ -59,6 +60,6 @@ const NavbarItemComponent = styled(CenteredRowFlex)`
 `;
 
 const NavbarItemText = styled(Hint)`
+  font-family: ${FontComfortaa.Bold};
   margin-left: 10px;
-  font-weight: bold;
 `;
