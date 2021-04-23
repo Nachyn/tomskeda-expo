@@ -20,3 +20,9 @@ export const Hint = styled(BaseText)`
   font-size: 12px;
   line-height: 16px;
 `;
+
+export const Header = styled(BaseText)`
+  font-size: 24px;
+  line-height: 32px;
+  font-family: ${FontComfortaa.Bold};
+`;

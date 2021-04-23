@@ -1,6 +1,6 @@
 import React from 'react';
-import { BaseText } from '../../typograhpy/text';
+import {InDevelop} from '../../components/InDevelop';
 
 export function FoodSelection() {
-  return <BaseText>FoodSelection</BaseText>;
+  return <InDevelop/>;
 }

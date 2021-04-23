@@ -1,6 +1,6 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { InDevelop } from '../../components/InDevelop';
 
 export function DeliveryInfo() {
-  return <Text>DeliveryInfo</Text>;
+  return <InDevelop />;
 }

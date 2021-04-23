@@ -39,7 +39,7 @@ export function App() {
               <Stack.Navigator
                 screenOptions={{
                   headerShown: false,
-                  animationTypeForReplace: 'pop'
+                  animationEnabled: false
                 }}
               >
                 <Stack.Screen

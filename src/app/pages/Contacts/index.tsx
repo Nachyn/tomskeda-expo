@@ -1,6 +1,6 @@
 import React from 'react';
-import { TextRegular } from '../../typograhpy/text';
+import { InDevelop } from '../../components/InDevelop';
 
 export function Contacts() {
-  return <TextRegular>Contacts</TextRegular>;
+  return <InDevelop />;
 }
