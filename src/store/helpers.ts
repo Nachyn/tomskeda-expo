@@ -6,7 +6,7 @@ function createActionName(storeName: string, actionName: string) {
 
 export function getCreatePayloadActionFromStore(storeName: string) {
   return function <T>(actionName: string) {
-    return createAction(createActionName(storeName, actionName));
+    return createAction<T>(createActionName(storeName, actionName));
   };
 }
 

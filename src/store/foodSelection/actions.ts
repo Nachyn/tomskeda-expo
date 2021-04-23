@@ -1,6 +1,12 @@
 import { Food } from './models/food';
-import { getCreatePayloadActionFromStore } from '../helpers';
+import {
+  getCreateActionFromStore,
+  getCreatePayloadActionFromStore
+} from '../helpers';
 
-const createPayloadAction = getCreatePayloadActionFromStore('foodSelection');
+const storeName = 'foodSelection';
+const createPayloadAction = getCreatePayloadActionFromStore(storeName);
+const createAction = getCreateActionFromStore(storeName);
 
+export const loadFoods = createAction('loadFoods');
 export const loadFoodsSuccess = createPayloadAction<Food[]>('loadFoodsSuccess');
