@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FoodSelection } from './pages/FoodSelection';
 import { AppLoading } from './components/AppLoading';
 import { StatusBar } from 'react-native';
@@ -17,14 +17,25 @@ import { Contacts } from './pages/Contacts';
 import { Provider } from 'react-redux';
 import { store } from '../store/store';
 import { useLoadFontComfortaa } from './fonts/comfortaa';
+import { appLoadingSyntheticDelayMs } from './consts/app/app-consts';
 
 const Stack = createStackNavigator();
 
 export function App() {
   const [fontIsLoaded] = useLoadFontComfortaa();
-
   const [navIsReady, setNavIsReady] = useState(false);
-  const appIsReady = fontIsLoaded && navIsReady;
+  const [syntheticDelayIsComplete, setSyntheticDelayIsComplete] = useState(
+    false
+  );
+
+  const appIsReady = fontIsLoaded && navIsReady && syntheticDelayIsComplete;
+
+  useEffect(() => {
+    setTimeout(
+      () => setSyntheticDelayIsComplete(true),
+      appLoadingSyntheticDelayMs
+    );
+  }, []);
 
   return (
     <Provider store={store}>

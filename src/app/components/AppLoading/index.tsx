@@ -1,6 +1,17 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { ActivityIndicator } from 'react-native';
+import styled from 'styled-components/native';
+import { CenteredColumnFlex } from '../../typograhpy/flex';
+import { mainBlack } from '../../themes/colors';
 
 export function AppLoading() {
-  return <Text>Loading...</Text>;
+  return (
+    <InDevelopComponent>
+      <ActivityIndicator size={64} color={mainBlack} />
+    </InDevelopComponent>
+  );
 }
+
+const InDevelopComponent = styled(CenteredColumnFlex)`
+  height: 100%;
+`;
