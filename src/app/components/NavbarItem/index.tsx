@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import { mainBlack, mainGray, primaryColor } from '../../themes/colors';
+import { mainBlack, mainWhite, primaryColor } from '../../themes/colors';
 import { Hint } from '../../typograhpy/text';
 import { CenteredRowFlex } from '../../typograhpy/flex';
 import { IconSize } from '../../models/icon-size';
@@ -39,7 +39,7 @@ export function NavbarItem(props: NavbarItemProps) {
           color={currentColor}
         />
         {(props.isActive || !props.isShort) && (
-          <NavbarItemText color={currentColor}>{props.text}</NavbarItemText>
+          <NavbarItemText color={mainBlack}>{props.text}</NavbarItemText>
         )}
       </NavbarItemComponent>
     </TouchableWithoutFeedback>
@@ -53,7 +53,7 @@ const NavbarItemComponent = styled(CenteredRowFlex)`
   `}
   border-radius: 20px;
   height: 36px;
-  background: ${mainGray};
+  background: ${mainWhite};
   padding: 10px 20px;
 
   margin-right: 10px;

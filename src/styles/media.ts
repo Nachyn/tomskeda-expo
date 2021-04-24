@@ -6,7 +6,7 @@ export interface Media {
   isMobile?: boolean;
 }
 
-const sizes = {
+export const sizes = {
   mini: 360,
   mobile: 720,
   desktop: 1100

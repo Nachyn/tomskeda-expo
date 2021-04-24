@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Foundation, MaterialIcons } from '@expo/vector-icons';
 import { NavbarItem } from '../NavbarItem';
 import { IconSize } from '../../models/icon-size';
-import { mainWhite } from '../../themes/colors';
+import { primaryColor } from '../../themes/colors';
 import styled from 'styled-components/native';
 import { CenteredRowFlex } from '../../typograhpy/flex';
 import * as Router from '../../router/router';
@@ -60,7 +60,7 @@ export function Navbar() {
 const NavbarComponent = styled(CenteredRowFlex)`
   margin-top: auto;
   height: 64px;
-  background: ${mainWhite};
+  background: ${primaryColor};
 `;
 
 const LastNavbarItem = styled(NavbarItem)`

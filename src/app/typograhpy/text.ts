@@ -18,7 +18,7 @@ export const TextRegular = styled(BaseText)`
 
 export const Hint = styled(BaseText)`
   font-size: 12px;
-  line-height: 16px;
+  line-height: 14px;
 `;
 
 export const Header = styled(BaseText)`

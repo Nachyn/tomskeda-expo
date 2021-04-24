@@ -22,3 +22,7 @@ export const CenteredRowFlex = styled(RowFlex)`
   justify-content: center;
   align-items: center;
 `;
+
+export const SpaceBetweenRowFlex = styled(RowFlex)`
+  justify-content: space-between; ;
+`;
