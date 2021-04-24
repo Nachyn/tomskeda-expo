@@ -3,7 +3,6 @@ import { FoodSelection } from './pages/FoodSelection';
 import { AppLoading } from './components/AppLoading';
 import { ImageBackground, StatusBar } from 'react-native';
 import { Navbar } from './components/Navbar';
-import { mainWhite } from './themes/colors';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { DeliveryInfo } from './pages/DeliveryInfo';
@@ -16,7 +15,11 @@ import styled from 'styled-components/native';
 import { Contacts } from './pages/Contacts';
 import { Provider } from 'react-redux';
 import { store } from '../store/store';
-import { appLoadingSyntheticDelayMs } from './consts/app/app-consts';
+import {
+  appLoadingSyntheticDelayMs,
+  imageBackgroundImageStyle,
+  stackNavigatorScreenOptions
+} from './consts/app/app-consts';
 import { useLoadFontCeraPro } from './fonts/CeraPro';
 import { Layout } from './components/Layout';
 import appBackground from './images/app_background_2.jpg';
@@ -50,25 +53,12 @@ export function App() {
           <ImageBackground
             source={appBackground}
             style={{ height: '100%' }}
-            imageStyle={{
-              resizeMode: 'repeat',
-              overflow: 'visible',
-              backfaceVisibility: 'visible',
-              flex: 1
-            }}
+            imageStyle={imageBackgroundImageStyle}
           >
             <Layout>
               {appIsReady ? (
                 <Layout>
-                  <Stack.Navigator
-                    screenOptions={{
-                      headerShown: false,
-                      animationEnabled: false,
-                      cardStyle: {
-                        backgroundColor: mainWhite
-                      }
-                    }}
-                  >
+                  <Stack.Navigator screenOptions={stackNavigatorScreenOptions}>
                     <Stack.Screen
                       name={RouteNames.FoodSelection}
                       component={FoodSelection}
