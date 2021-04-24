@@ -1,13 +1,13 @@
 import styled from 'styled-components/native';
 import { mainBlack } from '../themes/colors';
 import { Text } from 'react-native';
-import { FontComfortaa } from '../fonts/comfortaa';
+import { FontCeraPro } from '../fonts/CeraPro';
 
 export const BaseText = styled(Text)<{
   color?: string;
-  font?: FontComfortaa;
+  font?: FontCeraPro;
 }>`
-  font-family: ${p => p.font || FontComfortaa.Regular};
+  font-family: ${p => p.font || FontCeraPro.Regular};
   color: ${p => p.color || mainBlack};
 `;
 
@@ -24,5 +24,5 @@ export const Hint = styled(BaseText)`
 export const Header = styled(BaseText)`
   font-size: 24px;
   line-height: 32px;
-  font-family: ${FontComfortaa.Bold};
+  font-family: ${FontCeraPro.Bold};
 `;

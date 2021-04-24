@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import {CenteredColumnFlex, CenteredRowFlex} from '../../typograhpy/flex';
+import { CenteredColumnFlex } from '../../typograhpy/flex';
 import { IconWrapper } from '../IconWrapper';
 import { Entypo } from '@expo/vector-icons';
 import { mainBlack } from '../../themes/colors';
@@ -20,5 +20,6 @@ const InDevelopComponent = styled(CenteredColumnFlex)`
 `;
 
 const Info = styled(Header)`
+  font-size: 18px;
   margin-top: 10px;
 `;

@@ -16,13 +16,13 @@ import styled from 'styled-components/native';
 import { Contacts } from './pages/Contacts';
 import { Provider } from 'react-redux';
 import { store } from '../store/store';
-import { useLoadFontComfortaa } from './fonts/comfortaa';
 import { appLoadingSyntheticDelayMs } from './consts/app/app-consts';
+import { useLoadFontCeraPro } from './fonts/CeraPro';
 
 const Stack = createStackNavigator();
 
 export function App() {
-  const [fontIsLoaded] = useLoadFontComfortaa();
+  const [fontIsLoaded] = useLoadFontCeraPro();
   const [navIsReady, setNavIsReady] = useState(false);
   const [syntheticDelayIsComplete, setSyntheticDelayIsComplete] = useState(
     false
