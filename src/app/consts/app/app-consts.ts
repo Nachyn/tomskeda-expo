@@ -14,6 +14,10 @@ export const imageBackgroundImageStyle: StyleProp<ImageStyle> = {
 export const stackNavigatorScreenOptions: StackNavigationOptions = {
   headerShown: false,
   animationEnabled: false,
+  detachPreviousScreen: false,
+  cardOverlayEnabled: false,
+  cardShadowEnabled: false,
+  gestureEnabled: false,
   cardStyle: {
     backgroundColor: mainWhite,
     borderRightWidth: 1,
