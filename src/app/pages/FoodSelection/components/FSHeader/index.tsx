@@ -50,7 +50,7 @@ const FSHeaderComponent = styled(SpaceBetweenRowFlex)<Media>`
 `;
 
 const Info = styled(ColumnFlex)`
-  width: 220px;
+  width: 230px;
 `;
 
 const OrderTime = styled(Hint)`

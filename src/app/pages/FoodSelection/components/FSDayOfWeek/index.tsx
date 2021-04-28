@@ -42,7 +42,6 @@ const FSDayOfWeekComponent = styled(CenteredRowFlex)<{
   background: ${p => (p.isSelected ? primaryColor : mainGray)};
   border-radius: 10px;
   margin-right: ${p => (p.isWithMargin ? '10px' : '0')};
-  margin-bottom: 10px;
 `;
 
 const DayText = styled(Hint)<{

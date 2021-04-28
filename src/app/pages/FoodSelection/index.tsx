@@ -1,8 +1,11 @@
 import React from 'react';
-import { CenteredColumnFlex, CenteredRowFlex } from '../../typograhpy/flex';
+import { CenteredColumnFlex, RowFlex } from '../../typograhpy/flex';
 import { FSHeader } from './components/FSHeader';
 import styled from 'styled-components/native';
 import { FSDayOfWeek } from './components/FSDayOfWeek';
+import { FSFoodType } from './components/FSFoodType';
+import { FoodType } from '../../models/food-type';
+import { ScrollView } from 'react-native';
 
 export function FoodSelection() {
   const testDays = [
@@ -15,27 +18,49 @@ export function FoodSelection() {
     new Date('2021-05-06')
   ];
 
+  const testFoodsTypes = Object.values(FoodType);
+
   return (
     <FoodSelectionComponent>
       <FSHeader />
 
-      <DaysOfWeek>
-        {testDays.map((date, index) => (
-          <FSDayOfWeek
-            key={index}
-            date={date}
-            isWithMargin={index !== testDays.length - 1}
-            isSelected={index === 0}
-          />
-        ))}
-      </DaysOfWeek>
+      <StyledScroll>
+        <DaysOfWeek>
+          {testDays.map((date, index) => (
+            <FSDayOfWeek
+              key={index}
+              date={date}
+              isWithMargin={index !== testDays.length - 1}
+              isSelected={index === 0}
+            />
+          ))}
+        </DaysOfWeek>
+      </StyledScroll>
+
+      <StyledScroll>
+        <FoodTypes>
+          {testFoodsTypes.map((foodType, index) => (
+            <FSFoodType key={index} type={foodType} />
+          ))}
+        </FoodTypes>
+      </StyledScroll>
     </FoodSelectionComponent>
   );
 }
 
 const FoodSelectionComponent = styled(CenteredColumnFlex)``;
 
-const DaysOfWeek = styled(CenteredRowFlex)`
-  margin: 30px 10px 0 10px;
-  flex-wrap: wrap;
+const StyledScroll = styled(ScrollView).attrs({
+  horizontal: true,
+  contentContainerStyle: { flexGrow: 1, justifyContent: 'center' }
+})`
+  width: 100%;
+`;
+
+const DaysOfWeek = styled(RowFlex)`
+  padding: 30px 20px 10px 20px;
+`;
+
+const FoodTypes = styled(RowFlex)`
+  padding: 15px 20px 10px 20px;
 `;
