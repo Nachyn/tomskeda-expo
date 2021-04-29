@@ -4,8 +4,20 @@ import {
   CenteredColumnFlex,
   CenteredRowFlex
 } from '../../../../typograhpy/flex';
-import { mainGray } from '../../../../themes/colors';
-import { AntDesign } from '@expo/vector-icons';
+import {
+  mainBlack,
+  mainGray,
+  mainWhite,
+  primaryColor
+} from '../../../../themes/colors';
+import {
+  Entypo,
+  FontAwesome,
+  FontAwesome5,
+  Ionicons,
+  MaterialCommunityIcons,
+  Octicons
+} from '@expo/vector-icons';
 import { Hint } from '../../../../typograhpy/text';
 import { FontCeraPro } from '../../../../fonts/CeraPro';
 import { IconWrapper } from '../../../../components/IconWrapper';
@@ -14,12 +26,16 @@ import { FoodType } from '../../../../models/food-type';
 
 interface FSFoodTypeProps {
   type: FoodType;
+  isSelected: boolean;
 }
 
 export function FSFoodType(props: FSFoodTypeProps) {
+  const iconColor = props.isSelected ? mainWhite : mainBlack;
   return (
     <FSFoodTypeComponent>
-      <IconFrame>{foodTypeIcons[props.type]}</IconFrame>
+      <IconFrame isSelected={props.isSelected}>
+        {foodTypeIcons(iconColor)[props.type]}
+      </IconFrame>
       <NameText>{foodTypeNames[props.type]}</NameText>
     </FSFoodTypeComponent>
   );
@@ -30,10 +46,12 @@ const FSFoodTypeComponent = styled(CenteredColumnFlex)`
   justify-content: flex-start;
 `;
 
-const IconFrame = styled(CenteredRowFlex)`
+const IconFrame = styled(CenteredRowFlex)<{
+  isSelected: boolean;
+}>`
   width: 50px;
   height: 50px;
-  background: ${mainGray};
+  background: ${p => (p.isSelected ? primaryColor : mainGray)};
   border-radius: 16px;
   margin-bottom: 10px;
 `;
@@ -64,117 +82,117 @@ const foodTypeNames = {
   [FoodType.DisposableTableware]: <>Однораз.{'\n'}посуда</>
 };
 
-const foodTypeIcons = {
+const foodTypeIcons = (color: string) => ({
   [FoodType.Complex]: (
     <IconWrapper
-      icon={AntDesign}
-      name={'hearto'}
+      icon={MaterialCommunityIcons}
+      name={'creation'}
       size={IconSize.s30x30}
-      color="black"
+      color={color}
     />
   ),
   [FoodType.First]: (
     <IconWrapper
-      icon={AntDesign}
-      name={'hearto'}
+      icon={MaterialCommunityIcons}
+      name={'pot-mix-outline'}
       size={IconSize.s30x30}
-      color="black"
+      color={color}
     />
   ),
   [FoodType.Second]: (
     <IconWrapper
-      icon={AntDesign}
-      name={'hearto'}
+      icon={MaterialCommunityIcons}
+      name={'food-drumstick-outline'}
       size={IconSize.s30x30}
-      color="black"
+      color={color}
     />
   ),
   [FoodType.VegetablesAndSideDishes]: (
     <IconWrapper
-      icon={AntDesign}
-      name={'hearto'}
+      icon={Entypo}
+      name={'leaf'}
       size={IconSize.s30x30}
-      color="black"
+      color={color}
     />
   ),
   [FoodType.SaladsAndSnacks]: (
     <IconWrapper
-      icon={AntDesign}
-      name={'hearto'}
+      icon={FontAwesome}
+      name={'leaf'}
       size={IconSize.s30x30}
-      color="black"
+      color={color}
     />
   ),
   [FoodType.DessertsAndBakery]: (
     <IconWrapper
-      icon={AntDesign}
-      name={'hearto'}
+      icon={MaterialCommunityIcons}
+      name={'food-croissant'}
       size={IconSize.s30x30}
-      color="black"
+      color={color}
     />
   ),
   [FoodType.Pancakes]: (
     <IconWrapper
-      icon={AntDesign}
-      name={'hearto'}
+      icon={FontAwesome5}
+      name={'dot-circle'}
       size={IconSize.s30x30}
-      color="black"
+      color={color}
     />
   ),
   [FoodType.Sandwiches]: (
     <IconWrapper
-      icon={AntDesign}
-      name={'hearto'}
+      icon={Ionicons}
+      name={'ios-fast-food-outline'}
       size={IconSize.s30x30}
-      color="black"
+      color={color}
     />
   ),
   [FoodType.Drinks]: (
     <IconWrapper
-      icon={AntDesign}
-      name={'hearto'}
+      icon={MaterialCommunityIcons}
+      name={'tea'}
       size={IconSize.s30x30}
-      color="black"
+      color={color}
     />
   ),
   [FoodType.DietFood]: (
     <IconWrapper
-      icon={AntDesign}
-      name={'hearto'}
+      icon={MaterialCommunityIcons}
+      name={'food-apple-outline'}
       size={IconSize.s30x30}
-      color="black"
+      color={color}
     />
   ),
   [FoodType.FestiveDishes]: (
     <IconWrapper
-      icon={AntDesign}
-      name={'hearto'}
+      icon={Octicons}
+      name={'star'}
       size={IconSize.s30x30}
-      color="black"
+      color={color}
     />
   ),
   [FoodType.SaucesAndSpices]: (
     <IconWrapper
-      icon={AntDesign}
-      name={'hearto'}
+      icon={MaterialCommunityIcons}
+      name={'soy-sauce'}
       size={IconSize.s30x30}
-      color="black"
+      color={color}
     />
   ),
   [FoodType.Bread]: (
     <IconWrapper
-      icon={AntDesign}
-      name={'hearto'}
+      icon={MaterialCommunityIcons}
+      name={'bread-slice-outline'}
       size={IconSize.s30x30}
-      color="black"
+      color={color}
     />
   ),
   [FoodType.DisposableTableware]: (
     <IconWrapper
-      icon={AntDesign}
-      name={'hearto'}
+      icon={MaterialCommunityIcons}
+      name={'silverware-spoon'}
       size={IconSize.s30x30}
-      color="black"
+      color={color}
     />
   )
-};
+});

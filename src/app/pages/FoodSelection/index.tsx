@@ -40,7 +40,7 @@ export function FoodSelection() {
       <StyledScroll>
         <FoodTypes>
           {testFoodsTypes.map((foodType, index) => (
-            <FSFoodType key={index} type={foodType} />
+            <FSFoodType key={index} type={foodType} isSelected={index === 0} />
           ))}
         </FoodTypes>
       </StyledScroll>
