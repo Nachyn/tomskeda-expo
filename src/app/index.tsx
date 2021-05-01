@@ -13,8 +13,7 @@ import { isWeb } from './helpers/platform-helpers';
 import { ColumnFlex } from './typograhpy/flex';
 import styled from 'styled-components/native';
 import { Contacts } from './pages/Contacts';
-import { Provider } from 'react-redux';
-import { store } from '../store/store';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   appLoadingSyntheticDelayMs,
   imageBackgroundImageStyle,
@@ -23,65 +22,69 @@ import {
 import { useLoadFontCeraPro } from './fonts/CeraPro';
 import { Layout } from './components/Layout';
 import appBackground from './images/app_background_2.jpg';
+import * as fsSelectors from '../store/foodSelection/selectors';
+import * as fsActions from '../store/foodSelection/actions';
 
 const Stack = createStackNavigator();
 
 export function App() {
+  const dispatch = useDispatch();
+
   const [fontIsLoaded] = useLoadFontCeraPro();
   const [navIsReady, setNavIsReady] = useState(false);
   const [syntheticDelayIsComplete, setSyntheticDelayIsComplete] = useState(
     false
   );
-
-  const appIsReady = fontIsLoaded && navIsReady && syntheticDelayIsComplete;
+  const foodsIsLoaded = useSelector(fsSelectors.selectIsLoaded);
+  const appIsReady =
+    fontIsLoaded && navIsReady && syntheticDelayIsComplete && foodsIsLoaded;
 
   useEffect(() => {
     setTimeout(
       () => setSyntheticDelayIsComplete(true),
       appLoadingSyntheticDelayMs
     );
+    dispatch(fsActions.loadFoods());
   }, []);
 
   return (
-    <Provider store={store}>
-      <NavigationContainer
-        linking={linking}
-        ref={navigationRef}
-        onReady={() => setNavIsReady(true)}
-      >
-        <AppComponent>
-          <ImageBackground
-            source={appBackground}
-            style={{ height: '100%' }}
-            imageStyle={imageBackgroundImageStyle}
-          >
-            <Layout>
-              {appIsReady ? (
-                <Layout>
-                  <Stack.Navigator screenOptions={stackNavigatorScreenOptions}>
-                    <Stack.Screen
-                      name={RouteNames.FoodSelection}
-                      component={FoodSelection}
-                    />
-                    <Stack.Screen
-                      name={RouteNames.DeliveryInfo}
-                      component={DeliveryInfo}
-                    />
-                    <Stack.Screen
-                      name={RouteNames.Contacts}
-                      component={Contacts}
-                    />
-                  </Stack.Navigator>
-                  <Navbar />
-                </Layout>
-              ) : (
-                <AppLoading />
-              )}
-            </Layout>
-          </ImageBackground>
-        </AppComponent>
-      </NavigationContainer>
-    </Provider>
+    <NavigationContainer
+      linking={linking}
+      ref={navigationRef}
+      onReady={() => setNavIsReady(true)}
+    >
+      <AppComponent>
+        <ImageBackground
+          source={appBackground}
+          style={{ height: '100%' }}
+          imageStyle={imageBackgroundImageStyle}
+        >
+          <Layout>
+            {appIsReady ? (
+              <Layout>
+                <Stack.Navigator screenOptions={stackNavigatorScreenOptions}>
+                  <Stack.Screen
+                    name={RouteNames.FoodSelection}
+                    component={FoodSelection}
+                  />
+                  <Stack.Screen
+                    name={RouteNames.DeliveryInfo}
+                    component={DeliveryInfo}
+                  />
+                  <Stack.Screen
+                    name={RouteNames.Contacts}
+                    component={Contacts}
+                  />
+                </Stack.Navigator>
+                <Navbar />
+              </Layout>
+            ) : (
+              <AppLoading />
+            )}
+          </Layout>
+        </ImageBackground>
+      </AppComponent>
+    </NavigationContainer>
   );
 }
 

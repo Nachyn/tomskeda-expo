@@ -8,24 +8,20 @@ import { FSHeader } from './components/FSHeader';
 import styled from 'styled-components/native';
 import { FSDayOfWeek } from './components/FSDayOfWeek';
 import { FSFoodType } from './components/FSFoodType';
-import { FoodType } from '../../models/food-type';
+import { FoodType } from '../../../store/foodSelection/models/food-type';
 import CustomScroll from '../../components/CustomScroll';
 import { FSFood } from './components/FSFood';
 import { ScrollView } from 'react-native';
+import { useSelector } from 'react-redux';
+import * as fsSelectors from '../../../store/foodSelection/selectors';
 
 export function FoodSelection() {
-  const testDays = [
-    new Date('2021-04-30'),
-    new Date('2021-05-01'),
-    new Date('2021-05-02'),
-    new Date('2021-05-03'),
-    new Date('2021-05-04'),
-    new Date('2021-05-04'),
-    new Date('2021-05-04'),
-    new Date('2021-05-05')
-  ];
+  const dates = useSelector(fsSelectors.selectDates);
+  const foods = useSelector(fsSelectors.selectFoods);
+  const selectedDay = useSelector(fsSelectors.selectSelectedDate);
+  const selectedFoodType = useSelector(fsSelectors.selectSelectedFoodType);
 
-  const testFoodsTypes = Object.values(FoodType);
+  const foodsTypes = Object.values(FoodType);
 
   return (
     <Scroll>
@@ -34,12 +30,12 @@ export function FoodSelection() {
 
         <CustomScroll>
           <DaysOfWeek>
-            {testDays.map((date, index) => (
+            {dates.map((date, index) => (
               <FSDayOfWeek
                 key={index}
                 date={date}
-                isWithMargin={index !== testDays.length - 1}
-                isSelected={index === 0}
+                isWithMargin={index !== dates.length - 1}
+                isSelected={selectedDay === date}
               />
             ))}
           </DaysOfWeek>
@@ -47,25 +43,20 @@ export function FoodSelection() {
 
         <CustomScroll>
           <FoodTypes>
-            {testFoodsTypes.map((foodType, index) => (
+            {foodsTypes.map((foodType, index) => (
               <FSFoodType
                 key={index}
                 type={foodType}
-                isSelected={index === 0}
+                isSelected={selectedFoodType === foodType}
               />
             ))}
           </FoodTypes>
         </CustomScroll>
 
         <Foods>
-          <FSFood />
-          <FSFood />
-          <FSFood />
-          <FSFood />
-          <FSFood />
-          <FSFood />
-          <FSFood />
-          <FSFood />
+          {foods?.map(food => (
+            <FSFood key={food.id} food={food} />
+          ))}
         </Foods>
       </FoodSelectionComponent>
     </Scroll>

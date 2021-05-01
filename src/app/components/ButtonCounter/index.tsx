@@ -26,7 +26,7 @@ export function ButtonCounter(props: ButtonCounterProps) {
           size={IconSize.s24x24}
         />
       </Button>
-      <Score>{props.score > 0 ? '-----' : `${props.score}`}</Score>
+      <Score>{props.score > 0 ? `${props.score}` : '-----'}</Score>
       <Button>
         <IconWrapper
           icon={AntDesign}

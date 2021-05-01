@@ -22,7 +22,7 @@ import { Hint } from '../../../../typograhpy/text';
 import { FontCeraPro } from '../../../../fonts/CeraPro';
 import { IconWrapper } from '../../../../components/IconWrapper';
 import { IconSize } from '../../../../models/icon-size';
-import { FoodType } from '../../../../models/food-type';
+import { FoodType } from '../../../../../store/foodSelection/models/food-type';
 
 interface FSFoodTypeProps {
   type: FoodType;

@@ -6,23 +6,30 @@ import {
 } from '../../../../typograhpy/flex';
 import { mainBlack, mainGray, mainWhite } from '../../../../themes/colors';
 import { ImageBackground } from 'react-native';
-import mock1 from '../../../../../../assets/mocks/1.jpg';
 import { TextRegular } from '../../../../typograhpy/text';
 import { FontCeraPro } from '../../../../fonts/CeraPro';
 import { ButtonCounter } from '../../../../components/ButtonCounter';
 import { AntDesign } from '@expo/vector-icons';
 import { IconWrapper } from '../../../../components/IconWrapper';
 import { IconSize } from '../../../../models/icon-size';
+import { numberWithSpaces } from '../../../../helpers/number-helpers';
+import { Food } from '../../../../../store/foodSelection/models/food';
 
 interface FSFoodProps {
-  imgUrl: string;
+  food: Food;
 }
 
-export function FSFood() {
+export function FSFood(props: FSFoodProps) {
+  console.log(props.food);
+
   return (
     <FSFoodComponent>
-      <Name>Строганов из курицы со стручковой фасолью и болгарским перцем</Name>
-      <Image source={mock1}>
+      <Name>{props.food.name}</Name>
+      <Image
+        source={{
+          uri: props.food.imgUrl
+        }}
+      >
         <Info>
           <IconWrapper
             size={IconSize.s20x20}
@@ -33,10 +40,10 @@ export function FSFood() {
           />
         </Info>
         <Sum>
-          <TextRegular>120₽</TextRegular>
+          <TextRegular>{`${numberWithSpaces(props.food.price)} ₽`}</TextRegular>
         </Sum>
       </Image>
-      <StyledButtonCounter score={10} />
+      <StyledButtonCounter score={props.food.pieces} />
     </FSFoodComponent>
   );
 }
