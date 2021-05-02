@@ -2,7 +2,7 @@ export const mainBlack = '#000';
 export const mainWhite = '#FFF';
 export const mainGray = '#E5E5E5';
 export const mainOrange = '#FECA57';
-
+export const mainTransparent = 'transparent';
 export const primaryColor = 'rgb(136,185,216)';
 
 //region FSHeader

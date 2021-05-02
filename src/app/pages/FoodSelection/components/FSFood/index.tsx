@@ -4,12 +4,17 @@ import {
   CenteredColumnFlex,
   CenteredRowFlex
 } from '../../../../typograhpy/flex';
-import { mainBlack, mainGray, mainWhite } from '../../../../themes/colors';
-import { ImageBackground } from 'react-native';
+import {
+  mainBlack,
+  mainGray,
+  mainTransparent,
+  mainWhite
+} from '../../../../themes/colors';
+import { ImageBackground, TouchableWithoutFeedback } from 'react-native';
 import { TextRegular } from '../../../../typograhpy/text';
 import { FontCeraPro } from '../../../../fonts/CeraPro';
 import { ButtonCounter } from '../../../../components/ButtonCounter';
-import { AntDesign } from '@expo/vector-icons';
+import { AntDesign, MaterialIcons } from '@expo/vector-icons';
 import { IconWrapper } from '../../../../components/IconWrapper';
 import { IconSize } from '../../../../models/icon-size';
 import { numberWithSpaces } from '../../../../helpers/number-helpers';
@@ -17,44 +22,76 @@ import { Food } from '../../../../../store/foodSelection/models/food';
 import * as fsActions from '../../../../../store/foodSelection/actions';
 import { useDispatch } from 'react-redux';
 
+export enum FSFoodMode {
+  Default,
+  ComplexSelect,
+  ComplexOnlyShow
+}
+
 interface FSFoodProps {
   food: Food;
+  mode: FSFoodMode;
+
+  isSelectedComplex?: boolean;
+  onClick?: () => void;
 }
 
 export function FSFood(props: FSFoodProps) {
   const dispatch = useDispatch();
 
   return (
-    <FSFoodComponent>
-      <Name>{props.food.name}</Name>
-      <Image
-        source={{
-          uri: props.food.imgUrl
-        }}
-      >
-        <Info>
-          <IconWrapper
-            size={IconSize.s20x20}
-            name={'infocirlceo'}
-            color={mainBlack}
-            icon={AntDesign}
-            iconSize={19}
+    <TouchableWithoutFeedback onPress={props.onClick}>
+      <FSFoodComponent>
+        <Name>{props.food.name}</Name>
+        <Image
+          source={{
+            uri: props.food.imgUrl
+          }}
+        >
+          <Info>
+            <IconWrapper
+              size={IconSize.s20x20}
+              name={'infocirlceo'}
+              color={mainBlack}
+              icon={AntDesign}
+              iconSize={19}
+            />
+          </Info>
+          {props.mode === FSFoodMode.Default && (
+            <Sum>
+              <TextRegular>{`${numberWithSpaces(
+                props.food.price
+              )} ₽`}</TextRegular>
+            </Sum>
+          )}
+          {props.mode === FSFoodMode.ComplexSelect && (
+            <CheckMark>
+              <IconWrapper
+                icon={MaterialIcons}
+                color={props.isSelectedComplex ? mainBlack : mainTransparent}
+                name={'check-circle'}
+                size={IconSize.s24x24}
+              />
+            </CheckMark>
+          )}
+        </Image>
+        {props.mode === FSFoodMode.Default && (
+          <StyledButtonCounter
+            onIncrease={() => {
+              dispatch(
+                fsActions.increaseFoodQuantity({ foodId: props.food.id })
+              );
+            }}
+            onDecrease={() =>
+              dispatch(
+                fsActions.decreaseFoodQuantity({ foodId: props.food.id })
+              )
+            }
+            score={props.food.quantity}
           />
-        </Info>
-        <Sum>
-          <TextRegular>{`${numberWithSpaces(props.food.price)} ₽`}</TextRegular>
-        </Sum>
-      </Image>
-      <StyledButtonCounter
-        onIncrease={() => {
-          dispatch(fsActions.increaseFoodQuantity({ foodId: props.food.id }));
-        }}
-        onDecrease={() =>
-          dispatch(fsActions.decreaseFoodQuantity({ foodId: props.food.id }))
-        }
-        score={props.food.quantity}
-      />
-    </FSFoodComponent>
+        )}
+      </FSFoodComponent>
+    </TouchableWithoutFeedback>
   );
 }
 
@@ -92,12 +129,23 @@ const Info = styled(CenteredRowFlex)`
   top: 10px;
   left: 10px;
   background: ${mainWhite};
-  border-radius: 20px;
+  border-radius: 30px;
+`;
+
+const CheckMark = styled(CenteredRowFlex)`
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: ${mainWhite};
+  border-radius: 30px;
+  height: 20px;
+  width: 20px;
+  border: 1px solid ${mainBlack};
 `;
 
 const Name = styled(TextRegular)`
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   font-family: ${FontCeraPro.Bold};
 `;
 

@@ -26,7 +26,7 @@ export function ButtonCounter(props: ButtonCounterProps) {
             icon={AntDesign}
             color={mainBlack}
             name={'caretleft'}
-            size={IconSize.s24x24}
+            size={IconSize.s20x20}
           />
         </Button>
       </TouchableWithoutFeedback>
@@ -37,7 +37,7 @@ export function ButtonCounter(props: ButtonCounterProps) {
             icon={AntDesign}
             color={mainBlack}
             name={'caretright'}
-            size={IconSize.s24x24}
+            size={IconSize.s20x20}
           />
         </Button>
       </TouchableWithoutFeedback>

@@ -7,13 +7,13 @@ import {
 import { FSHeader } from './components/FSHeader';
 import styled from 'styled-components/native';
 import { FSDayOfWeek } from './components/FSDayOfWeek';
-import { FSFoodType } from './components/FSFoodType';
 import { FoodType } from '../../../store/foodSelection/models/food-type';
 import CustomScroll from '../../components/CustomScroll';
-import { FSFood } from './components/FSFood';
+import { FSFood, FSFoodMode } from './components/FSFood';
 import { ScrollView } from 'react-native';
 import { useSelector } from 'react-redux';
 import * as fsSelectors from '../../../store/foodSelection/selectors';
+import { FSFoodType } from './components/FSFoodType';
 
 export function FoodSelection() {
   const dates = useSelector(fsSelectors.selectDates);
@@ -55,7 +55,7 @@ export function FoodSelection() {
 
         <Foods>
           {foods?.map(food => (
-            <FSFood key={food.id} food={food} />
+            <FSFood key={food.id} food={food} mode={FSFoodMode.Default} />
           ))}
         </Foods>
       </FoodSelectionComponent>
@@ -74,7 +74,7 @@ const FoodTypes = styled(RowFlex)`
 `;
 
 const Foods = styled(CenteredRowFlex)`
-  padding: 30px 20px 10px 20px;
+  padding: 20px;
   flex-wrap: wrap;
 `;
 const Scroll = styled(ScrollView)`

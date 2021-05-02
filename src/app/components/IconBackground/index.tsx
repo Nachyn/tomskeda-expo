@@ -18,5 +18,5 @@ const IconBackgroundComponent = styled(RowFlex)<{
 }>`
   height: ${p => `${p.size}px`};
   width: ${p => `${p.size}px`};
-  background-image: url(${p => p.url}) no-repeat;
+  background-image: url(${p => p.url});
 `;
