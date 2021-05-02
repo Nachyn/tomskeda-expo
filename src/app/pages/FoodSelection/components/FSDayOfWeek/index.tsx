@@ -12,6 +12,10 @@ import { dayOfWeekNames } from '../../../../consts/food-selection/food-selection
 import { DayOfWeek } from '../../../../models/day-of-week';
 import format from 'date-fns/format';
 import { FontCeraPro } from '../../../../fonts/CeraPro';
+import { isWeb } from '../../../../helpers/platform-helpers';
+import * as fsActions from '../../../../../store/foodSelection/actions';
+import { useDispatch } from 'react-redux';
+import { TouchableWithoutFeedback } from 'react-native';
 
 interface FSDayOfWeekProps {
   date: Date;
@@ -20,17 +24,22 @@ interface FSDayOfWeekProps {
 }
 
 export function FSDayOfWeek(props: FSDayOfWeekProps) {
+  const dispatch = useDispatch();
   const dayOfWeekName = dayOfWeekNames[props.date.getDay() as DayOfWeek];
 
   return (
-    <FSDayOfWeekComponent
-      isWithMargin={props.isWithMargin}
-      isSelected={props.isSelected}
+    <TouchableWithoutFeedback
+      onPress={() => dispatch(fsActions.setSelectedDay(props.date))}
     >
-      <DayText isSelected={props.isSelected}>
-        {`${dayOfWeekName} ${format(props.date, 'dd/MM')}`}
-      </DayText>
-    </FSDayOfWeekComponent>
+      <FSDayOfWeekComponent
+        isWithMargin={props.isWithMargin}
+        isSelected={props.isSelected}
+      >
+        <DayText isSelected={props.isSelected}>
+          {`${dayOfWeekName} ${format(props.date, 'dd/MM')}`}
+        </DayText>
+      </FSDayOfWeekComponent>
+    </TouchableWithoutFeedback>
   );
 }
 
@@ -42,6 +51,11 @@ const FSDayOfWeekComponent = styled(CenteredRowFlex)<{
   background: ${p => (p.isSelected ? primaryColor : mainGray)};
   border-radius: 10px;
   margin-right: ${p => (p.isWithMargin ? '10px' : '0')};
+
+  ${isWeb() &&
+  `
+    cursor: pointer;
+  `}
 `;
 
 const DayText = styled(Hint)<{

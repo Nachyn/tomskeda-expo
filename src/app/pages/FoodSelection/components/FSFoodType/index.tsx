@@ -23,6 +23,10 @@ import { FontCeraPro } from '../../../../fonts/CeraPro';
 import { IconWrapper } from '../../../../components/IconWrapper';
 import { IconSize } from '../../../../models/icon-size';
 import { FoodType } from '../../../../../store/foodSelection/models/food-type';
+import { useDispatch } from 'react-redux';
+import * as fsActions from '../../../../../store/foodSelection/actions';
+import { TouchableWithoutFeedback } from 'react-native';
+import { isWeb } from '../../../../helpers/platform-helpers';
 
 interface FSFoodTypeProps {
   type: FoodType;
@@ -30,20 +34,31 @@ interface FSFoodTypeProps {
 }
 
 export function FSFoodType(props: FSFoodTypeProps) {
+  const dispatch = useDispatch();
   const iconColor = props.isSelected ? mainWhite : mainBlack;
+
   return (
-    <FSFoodTypeComponent>
-      <IconFrame isSelected={props.isSelected}>
-        {foodTypeIcons(iconColor)[props.type]}
-      </IconFrame>
-      <NameText>{foodTypeNames[props.type]}</NameText>
-    </FSFoodTypeComponent>
+    <TouchableWithoutFeedback
+      onPress={() => dispatch(fsActions.setSelectedFoodType(props.type))}
+    >
+      <FSFoodTypeComponent>
+        <IconFrame isSelected={props.isSelected}>
+          {foodTypeIcons(iconColor)[props.type]}
+        </IconFrame>
+        <NameText>{foodTypeNames[props.type]}</NameText>
+      </FSFoodTypeComponent>
+    </TouchableWithoutFeedback>
   );
 }
 
 const FSFoodTypeComponent = styled(CenteredColumnFlex)`
   width: 70px;
   justify-content: flex-start;
+
+  ${isWeb() &&
+  `
+    cursor: pointer;
+  `}
 `;
 
 const IconFrame = styled(CenteredRowFlex)<{

@@ -13,7 +13,7 @@ export const foodsDaysMock: FoodsDay[] = [
         price: 108,
         imgUrl:
           'https://tomskeda.ru/pict/eda/suhoj-nabor-dla-okroski-masnoj-so-smetanoj-11182.jpg',
-        pieces: 0
+        quantity: 0
       },
       {
         id: 2,
@@ -22,7 +22,7 @@ export const foodsDaysMock: FoodsDay[] = [
         price: 108,
         imgUrl:
           'https://tomskeda.ru/pict/eda/suhoj-nabor-dla-okroski-masnoj-so-smetanoj-11182.jpg',
-        pieces: 0
+        quantity: 0
       },
       {
         id: 3,
@@ -31,7 +31,7 @@ export const foodsDaysMock: FoodsDay[] = [
         price: 80,
         imgUrl:
           'https://tomskeda.ru/pict/eda/bors-ukrainskij-s-masom-i-so-smetanoj.jpg',
-        pieces: 0
+        quantity: 0
       },
       {
         id: 4,
@@ -40,7 +40,7 @@ export const foodsDaysMock: FoodsDay[] = [
         price: 65,
         imgUrl:
           'https://tomskeda.ru/pict/eda/bors-ukrainskij-s-masom-i-so-smetanoj.jpg',
-        pieces: 0
+        quantity: 0
       },
       {
         id: 5,
@@ -48,7 +48,7 @@ export const foodsDaysMock: FoodsDay[] = [
         name: 'Суп картофельный с фасолью',
         price: 65,
         imgUrl: 'https://tomskeda.ru/pict/eda/sup-kartofelnyj-s-fasolu.jpg',
-        pieces: 0
+        quantity: 0
       },
       {
         id: 6,
@@ -57,7 +57,7 @@ export const foodsDaysMock: FoodsDay[] = [
         price: 76,
         imgUrl:
           'https://tomskeda.ru/pict/eda/sup-s-kurinymi-frikadelkami-petrovskij.jpg',
-        pieces: 0
+        quantity: 0
       }
     ]
   },

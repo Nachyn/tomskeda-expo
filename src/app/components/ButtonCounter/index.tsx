@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import { CenteredRowFlex, SpaceBetweenRowFlex } from '../../typograhpy/flex';
 import { TextRegular } from '../../typograhpy/text';
 import { isWeb } from '../../helpers/platform-helpers';
-import { StyleProp, ViewStyle } from 'react-native';
+import { StyleProp, TouchableWithoutFeedback, ViewStyle } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import { IconWrapper } from '../IconWrapper';
 import { IconSize } from '../../models/icon-size';
@@ -12,29 +12,35 @@ import { FontCeraPro } from '../../fonts/CeraPro';
 
 interface ButtonCounterProps {
   score: number;
+  onIncrease: () => void;
+  onDecrease: () => void;
   style?: StyleProp<ViewStyle>;
 }
 
 export function ButtonCounter(props: ButtonCounterProps) {
   return (
     <ButtonCounterComponent style={props.style}>
-      <Button>
-        <IconWrapper
-          icon={AntDesign}
-          color={mainBlack}
-          name={'caretleft'}
-          size={IconSize.s24x24}
-        />
-      </Button>
-      <Score>{props.score > 0 ? `${props.score}` : '-----'}</Score>
-      <Button>
-        <IconWrapper
-          icon={AntDesign}
-          color={mainBlack}
-          name={'caretright'}
-          size={IconSize.s24x24}
-        />
-      </Button>
+      <TouchableWithoutFeedback onPress={props.onDecrease}>
+        <Button>
+          <IconWrapper
+            icon={AntDesign}
+            color={mainBlack}
+            name={'caretleft'}
+            size={IconSize.s24x24}
+          />
+        </Button>
+      </TouchableWithoutFeedback>
+      <Score>{props.score > 0 ? `${props.score}` : '—'}</Score>
+      <TouchableWithoutFeedback onPress={props.onIncrease}>
+        <Button>
+          <IconWrapper
+            icon={AntDesign}
+            color={mainBlack}
+            name={'caretright'}
+            size={IconSize.s24x24}
+          />
+        </Button>
+      </TouchableWithoutFeedback>
     </ButtonCounterComponent>
   );
 }
@@ -42,12 +48,13 @@ export function ButtonCounter(props: ButtonCounterProps) {
 const ButtonCounterComponent = styled(SpaceBetweenRowFlex)`
   width: 100%;
   background: ${mainGray};
-  border-radius: 10px;
-  padding: 5px 10px;
+  border-radius: 30px;
+  padding: 5px 0;
   align-items: center;
 `;
 
 const Button = styled(CenteredRowFlex)`
+  padding: 0 10px;
   height: 100%;
 
   ${isWeb() &&

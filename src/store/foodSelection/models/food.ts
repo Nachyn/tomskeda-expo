@@ -6,5 +6,5 @@ export interface Food {
   name: string;
   price: number;
   imgUrl: string;
-  pieces: number;
+  quantity: number;
 }

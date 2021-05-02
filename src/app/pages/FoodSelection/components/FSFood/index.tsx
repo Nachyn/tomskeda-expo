@@ -14,13 +14,15 @@ import { IconWrapper } from '../../../../components/IconWrapper';
 import { IconSize } from '../../../../models/icon-size';
 import { numberWithSpaces } from '../../../../helpers/number-helpers';
 import { Food } from '../../../../../store/foodSelection/models/food';
+import * as fsActions from '../../../../../store/foodSelection/actions';
+import { useDispatch } from 'react-redux';
 
 interface FSFoodProps {
   food: Food;
 }
 
 export function FSFood(props: FSFoodProps) {
-  console.log(props.food);
+  const dispatch = useDispatch();
 
   return (
     <FSFoodComponent>
@@ -43,7 +45,15 @@ export function FSFood(props: FSFoodProps) {
           <TextRegular>{`${numberWithSpaces(props.food.price)} ₽`}</TextRegular>
         </Sum>
       </Image>
-      <StyledButtonCounter score={props.food.pieces} />
+      <StyledButtonCounter
+        onIncrease={() => {
+          dispatch(fsActions.increaseFoodQuantity({ foodId: props.food.id }));
+        }}
+        onDecrease={() =>
+          dispatch(fsActions.decreaseFoodQuantity({ foodId: props.food.id }))
+        }
+        score={props.food.quantity}
+      />
     </FSFoodComponent>
   );
 }

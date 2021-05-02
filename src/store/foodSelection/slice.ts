@@ -22,16 +22,44 @@ export const foodSelectionSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: builder => {
-    builder.addCase(actions.loadFoodsSuccess, (state, { payload }) => {
-      return {
-        ...state,
-        foodsDays: payload,
-        selectedDate: payload[0].date,
-        selectedFoodType: FoodType.First,
-        isLoaded: true
-      };
-    });
+    builder
+      .addCase(actions.loadFoodsSuccess, (state, { payload }) => {
+        return {
+          ...state,
+          foodsDays: payload,
+          selectedDate: payload[0].date,
+          selectedFoodType: FoodType.First,
+          isLoaded: true
+        };
+      })
+      .addCase(actions.increaseFoodQuantity, (state, { payload }) => {
+        const food = selectFoodByIdAndSelectedDate(state, payload.foodId);
+        if (!!food) {
+          food.quantity = food.quantity + 1;
+        }
+      })
+      .addCase(actions.decreaseFoodQuantity, (state, { payload }) => {
+        const food = selectFoodByIdAndSelectedDate(state, payload.foodId);
+        if (!!food) {
+          food.quantity = food.quantity > 0 ? food.quantity - 1 : 0;
+        }
+      })
+      .addCase(actions.setSelectedDay, (state, { payload }) => {
+        state.selectedDate = payload;
+      })
+      .addCase(actions.setSelectedFoodType, (state, { payload }) => {
+        state.selectedFoodType = payload;
+      });
   }
 });
+
+function selectFoodByIdAndSelectedDate(
+  state: FoodSelectionState,
+  foodId: number
+) {
+  return state.foodsDays
+    .find(d => d.date === state.selectedDate)
+    ?.foods.find(f => f.id === foodId);
+}
 
 export default foodSelectionSlice.reducer;
