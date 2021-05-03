@@ -51,7 +51,7 @@ const NavbarItemComponent = styled(CenteredRowFlex)`
   `
     cursor: pointer;
   `}
-  border-radius: 20px;
+  border-radius: 10px;
   height: 36px;
   background: ${mainWhite};
   padding: 10px 20px;

@@ -34,13 +34,13 @@ export const foodSelectionSlice = createSlice({
       })
       .addCase(actions.increaseFoodQuantity, (state, { payload }) => {
         const food = selectFoodByIdAndSelectedDate(state, payload.foodId);
-        if (!!food) {
+        if (!!food && food.quantity !== undefined) {
           food.quantity = food.quantity + 1;
         }
       })
       .addCase(actions.decreaseFoodQuantity, (state, { payload }) => {
         const food = selectFoodByIdAndSelectedDate(state, payload.foodId);
-        if (!!food) {
+        if (!!food && food.quantity !== undefined) {
           food.quantity = food.quantity > 0 ? food.quantity - 1 : 0;
         }
       })
@@ -59,7 +59,7 @@ function selectFoodByIdAndSelectedDate(
 ) {
   return state.foodsDays
     .find(d => d.date === state.selectedDate)
-    ?.foods.find(f => f.id === foodId);
+    ?.foods?.find(f => f.id === foodId);
 }
 
 export default foodSelectionSlice.reducer;

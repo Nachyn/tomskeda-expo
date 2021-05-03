@@ -33,14 +33,14 @@ interface FSFoodProps {
   mode: FSFoodMode;
 
   isSelectedComplex?: boolean;
-  onClick?: () => void;
+  onPress?: () => void;
 }
 
 export function FSFood(props: FSFoodProps) {
   const dispatch = useDispatch();
 
   return (
-    <TouchableWithoutFeedback onPress={props.onClick}>
+    <TouchableWithoutFeedback onPress={props.onPress}>
       <FSFoodComponent>
         <Name>{props.food.name}</Name>
         <Image
@@ -146,7 +146,7 @@ const CheckMark = styled(CenteredRowFlex)`
 const Name = styled(TextRegular)`
   text-align: center;
   margin-bottom: 15px;
-  font-family: ${FontCeraPro.Bold};
+  font-family: ${FontCeraPro.Medium};
 `;
 
 const StyledButtonCounter = styled(ButtonCounter)`

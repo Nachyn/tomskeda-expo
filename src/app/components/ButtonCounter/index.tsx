@@ -48,7 +48,7 @@ export function ButtonCounter(props: ButtonCounterProps) {
 const ButtonCounterComponent = styled(SpaceBetweenRowFlex)`
   width: 100%;
   background: ${mainGray};
-  border-radius: 30px;
+  border-radius: 10px;
   padding: 5px 0;
   align-items: center;
 `;
