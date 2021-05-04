@@ -49,6 +49,24 @@ export const foodSelectionSlice = createSlice({
       })
       .addCase(actions.setSelectedFoodType, (state, { payload }) => {
         state.selectedFoodType = payload;
+      })
+      .addCase(actions.setSelectedFirstFoodId, (state, { payload }) => {
+        const complexFood = selectComplexFood(state);
+        if (!!complexFood) {
+          complexFood.selectedFirstFoodId = payload.foodId;
+        }
+      })
+      .addCase(actions.setSelectedSecondFoodId, (state, { payload }) => {
+        const complexFood = selectComplexFood(state);
+        if (!!complexFood) {
+          complexFood.selectedSecondFoodId = payload.foodId;
+        }
+      })
+      .addCase(actions.setSelectedSideDishesFoodId, (state, { payload }) => {
+        const complexFood = selectComplexFood(state);
+        if (!!complexFood) {
+          complexFood.selectedSideDishesFoodId = payload.foodId;
+        }
       });
   }
 });
@@ -60,6 +78,10 @@ function selectFoodByIdAndSelectedDate(
   return state.foodsDays
     .find(d => d.date === state.selectedDate)
     ?.foods?.find(f => f.id === foodId);
+}
+
+function selectComplexFood(state: FoodSelectionState) {
+  return state.foodsDays.find(d => d.date === state.selectedDate)?.complexFood;
 }
 
 export default foodSelectionSlice.reducer;

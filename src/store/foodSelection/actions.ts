@@ -25,3 +25,13 @@ export const setSelectedDay = createPayloadAction<Date>('setSelectedDay');
 export const setSelectedFoodType = createPayloadAction<FoodType>(
   'setSelectedFoodType'
 );
+
+export const setSelectedFirstFoodId = createPayloadAction<{ foodId: number }>(
+  'setSelectedFirstFoodId'
+);
+export const setSelectedSecondFoodId = createPayloadAction<{ foodId: number }>(
+  'setSelectedSecondFoodId'
+);
+export const setSelectedSideDishesFoodId = createPayloadAction<{
+  foodId: number;
+}>('setSelectedSideDishesFoodId');

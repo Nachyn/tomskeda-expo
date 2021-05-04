@@ -21,6 +21,7 @@ import { numberWithSpaces } from '../../../../helpers/number-helpers';
 import { Food } from '../../../../../store/foodSelection/models/food';
 import * as fsActions from '../../../../../store/foodSelection/actions';
 import { useDispatch } from 'react-redux';
+import { isWeb } from '../../../../helpers/platform-helpers';
 
 export enum FSFoodMode {
   Default,
@@ -33,15 +34,19 @@ interface FSFoodProps {
   mode: FSFoodMode;
 
   isSelectedComplex?: boolean;
-  onPress?: () => void;
+  onPress?: (foodId: number) => void;
 }
 
 export function FSFood(props: FSFoodProps) {
   const dispatch = useDispatch();
 
   return (
-    <TouchableWithoutFeedback onPress={props.onPress}>
-      <FSFoodComponent>
+    <TouchableWithoutFeedback
+      onPress={() => !!props.onPress && props.onPress(props.food.id)}
+    >
+      <FSFoodComponent
+        isComplexSelect={props.mode === FSFoodMode.ComplexSelect}
+      >
         <Name>{props.food.name}</Name>
         <Image
           source={{
@@ -60,7 +65,7 @@ export function FSFood(props: FSFoodProps) {
           {props.mode === FSFoodMode.Default && (
             <Sum>
               <TextRegular>{`${numberWithSpaces(
-                props.food.price
+                !!props.food.price ? props.food.price : 0
               )} ₽`}</TextRegular>
             </Sum>
           )}
@@ -95,13 +100,17 @@ export function FSFood(props: FSFoodProps) {
   );
 }
 
-const FSFoodComponent = styled(CenteredColumnFlex)`
+const FSFoodComponent = styled(CenteredColumnFlex)<{
+  isComplexSelect: boolean;
+}>`
   padding: 5px;
   width: 200px;
 
   border-radius: 10px;
   margin-bottom: 20px;
   align-self: flex-end;
+
+  ${p => p.isComplexSelect && isWeb() && 'cursor: pointer'};
 `;
 
 const Image = styled(ImageBackground).attrs({

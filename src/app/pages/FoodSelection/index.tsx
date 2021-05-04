@@ -8,30 +8,23 @@ import { Header } from '../../typograhpy/text';
 import { FSHeader } from './components/FSHeader';
 import styled from 'styled-components/native';
 import { FSDayOfWeek } from './components/FSDayOfWeek';
-import { FoodType } from '../../../store/foodSelection/models/food-type';
 import CustomScroll from '../../components/CustomScroll';
 import { FSFood, FSFoodMode } from './components/FSFood';
 import { ScrollView } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as fsSelectors from '../../../store/foodSelection/selectors';
+import * as fsActions from '../../../store/foodSelection/actions';
 import { FSFoodType } from './components/FSFoodType';
 import { BaseButton } from '../../components/BaseButton';
 import { FontAwesome } from '@expo/vector-icons';
 import { IconWrapper } from '../../components/IconWrapper';
-import {mainBlack, mainGray} from '../../themes/colors';
+import { mainBlack, mainGray } from '../../themes/colors';
 import { IconSize } from '../../models/icon-size';
-import {FontCeraPro} from "../../fonts/CeraPro";
+import { FontCeraPro } from '../../fonts/CeraPro';
+import { Food } from '../../../store/foodSelection/models/food';
 
 export function FoodSelection() {
-  const foodMock = {
-    id: 1,
-    type: FoodType.First,
-    name: 'Мясная окрошка на квасе со сметаной',
-    price: 108,
-    imgUrl:
-      'https://tomskeda.ru/pict/eda/suhoj-nabor-dla-okroski-masnoj-so-smetanoj-11182.jpg',
-    quantity: 0
-  };
+  const dispatch = useDispatch();
 
   const dates = useSelector(fsSelectors.selectDates);
   const foods = useSelector(fsSelectors.selectFoods);
@@ -39,6 +32,8 @@ export function FoodSelection() {
   const selectedFoodType = useSelector(fsSelectors.selectSelectedFoodType);
 
   const foodsTypes = useSelector(fsSelectors.selectFoodTypes);
+
+  const complexFood = useSelector(fsSelectors.selectComplexFood);
 
   return (
     <Scroll>
@@ -77,6 +72,54 @@ export function FoodSelection() {
             ))}
           </Foods>
         )}
+
+        {!!complexFood && (
+          <Complex>
+            <ComplexFoods
+              header={'Выберите первое блюдо'}
+              mode={FSFoodMode.ComplexSelect}
+              foods={complexFood.firstFoods}
+              selectedFoodId={complexFood.selectedFirstFoodId}
+              onPress={foodId =>
+                dispatch(fsActions.setSelectedFirstFoodId({ foodId }))
+              }
+            />
+            <ComplexFoods
+              header={'Выберите второе блюдо'}
+              mode={FSFoodMode.ComplexSelect}
+              foods={complexFood.secondFoods}
+              selectedFoodId={complexFood.selectedSecondFoodId}
+              onPress={foodId =>
+                dispatch(fsActions.setSelectedSecondFoodId({ foodId }))
+              }
+            />
+            <ComplexFoods
+              header={'Выберите овощное блюдо / гарнир'}
+              mode={FSFoodMode.ComplexSelect}
+              foods={complexFood.sideDishes}
+              selectedFoodId={complexFood.selectedSideDishesFoodId}
+              onPress={foodId =>
+                dispatch(fsActions.setSelectedSideDishesFoodId({ foodId }))
+              }
+            />
+            <ComplexFoods
+              header={'Дополнительно входит'}
+              mode={FSFoodMode.ComplexOnlyShow}
+              foods={complexFood.extraFood}
+            />
+            <ButtonAddComplex
+              text={'Добавить в корзину'}
+              icon={
+                <IconWrapper
+                  icon={FontAwesome}
+                  color={mainBlack}
+                  name={'cart-plus'}
+                  size={IconSize.s24x24}
+                />
+              }
+            />
+          </Complex>
+        )}
       </FoodSelectionComponent>
     </Scroll>
   );
@@ -113,14 +156,38 @@ const ComplexHeader = styled(Header)`
   font-family: ${FontCeraPro.Medium};
 `;
 
-const ComplexFoods = styled(CenteredRowFlex)`
+const ComplexFoodsWrapper = styled(CenteredRowFlex)`
   flex-wrap: wrap;
-`
+`;
 
 const ButtonAddComplex = styled(BaseButton).attrs({
-  textStyle: {fontSize: 18, marginLeft: 10}
+  textStyle: { fontSize: 18, marginLeft: 10 }
 })`
   padding: 5px 10px;
   background: ${mainGray};
   border-radius: 10px;
-`
+`;
+
+const ComplexFoods = (props: {
+  header: string;
+  mode: FSFoodMode;
+  foods?: Food[];
+  selectedFoodId?: number;
+  onPress?: (foodId: number) => void;
+}) =>
+  !!props.foods?.length ? (
+    <>
+      <ComplexHeader>{props.header}</ComplexHeader>
+      <ComplexFoodsWrapper>
+        {props.foods.map(food => (
+          <FSFood
+            key={food.id}
+            food={food}
+            mode={props.mode}
+            isSelectedComplex={food.id === props.selectedFoodId}
+            onPress={props.onPress}
+          />
+        ))}
+      </ComplexFoodsWrapper>
+    </>
+  ) : null;

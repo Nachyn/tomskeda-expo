@@ -11,7 +11,7 @@ import { mainBlack, mainGray } from '../../themes/colors';
 import { FontCeraPro } from '../../fonts/CeraPro';
 
 interface ButtonCounterProps {
-  score: number;
+  score?: number;
   onIncrease: () => void;
   onDecrease: () => void;
   style?: StyleProp<ViewStyle>;
@@ -30,7 +30,7 @@ export function ButtonCounter(props: ButtonCounterProps) {
           />
         </Button>
       </TouchableWithoutFeedback>
-      <Score>{props.score > 0 ? `${props.score}` : '—'}</Score>
+      <Score>{!!props.score ? `${props.score}` : '—'}</Score>
       <TouchableWithoutFeedback onPress={props.onIncrease}>
         <Button>
           <IconWrapper
